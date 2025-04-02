@@ -17,7 +17,17 @@ const sanitizeInput = require('./middlewares/xssClean.js')
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+const allowedOrigins = [
+  "https://banka-promosyon-web.vercel.app",
+  "http://localhost:3000"
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
+
+
 app.use(express.json());
 
 // XSS temizleyici (her request için global uygulanabilir)
